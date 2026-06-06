@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نظرسنجی سازمانی | پویانوین قطعه جی</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy2: #112240;
+    --blue: #1a3a6e;
+    --accent: #c8952a;
+    --accent2: #e8b84b;
+    --light: #f0f4ff;
+    --white: #ffffff;
+    --gray: #6b7a99;
+    --border: #d0daf0;
+    --success: #2ecc71;
+    --danger: #e74c3c;
+    --text: #1a2640;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--navy);
+    min-height: 100vh;
+    color: var(--text);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(200,149,42,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(26,58,110,0.3) 0%, transparent 50%),
+      linear-gradient(135deg, #0a1628 0%, #112240 50%, #0d1f3c 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .gear-bg {
+    position: fixed;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .gear-bg.g1 { top: -100px; right: -100px; font-size: 400px; }
+  .gear-bg.g2 { bottom: -80px; left: -80px; font-size: 300px; animation: spin 60s linear infinite; }
+
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 40px 24px 32px;
+    background: linear-gradient(135deg, rgba(200,149,42,0.12) 0%, rgba(26,58,110,0.2) 100%);
+    border: 1px solid rgba(200,149,42,0.25);
+    border-radius: 20px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+    animation: fadeDown 0.6s ease;
+  }
+
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+
+  .logos-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .logo-img {
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  .logo-poya {
+    height: 80px;
+    max-width: 160px;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+  .logo-azzam {
+    height: 70px;
+    max-width: 150px;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+
+  .logo-ring {
+    width: 80px; height: 80px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 0 30px rgba(200,149,42,0.4);
+  }
+
+  .company-name {
+    font-size: 22px; font-weight: 800;
+    color: var(--accent2);
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .holding-name {
+    font-size: 13px; color: rgba(200,149,42,0.7);
+    margin-bottom: 16px; font-weight: 500;
+  }
+
+  .survey-title {
+    font-size: 17px; font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .survey-desc {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+
+  .badge-iatf {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(200,149,42,0.15);
+    border: 1px solid rgba(200,149,42,0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px; color: var(--accent2);
+    font-weight: 600; margin-top: 12px;
+  }
+
+  .badge-anon {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(46,204,113,0.1);
+    border: 1px solid rgba(46,204,113,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px; color: #2ecc71;
+    font-weight: 600; margin-top: 8px; margin-right: 8px;
+  }
+
+  /* Progress */
+  .progress-wrap {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .progress-bar-outer {
+    flex: 1; height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px; overflow: hidden;
+  }
+
+  .progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-text {
+    font-size: 12px; color: var(--accent2);
+    font-weight: 600; white-space: nowrap;
+  }
+
+  /* Steps */
+  .step { display: none; animation: fadeIn 0.4s ease; }
+  .step.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+
+  /* Cards */
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(5px);
+    transition: border-color 0.3s;
+  }
+
+  .card:hover { border-color: rgba(200,149,42,0.3); }
+
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .section-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 15px; font-weight: 700;
+    color: #fff;
+  }
+
+  .section-subtitle {
+    font-size: 11px; color: var(--gray);
+    margin-top: 2px;
+  }
+
+  /* Form Fields */
+  .field { margin-bottom: 18px; }
+
+  .field label {
+    display: block;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 8px;
+  }
+
+  .field label .optional {
+    font-size: 11px; color: var(--gray);
+    font-weight: 400; margin-right: 6px;
+  }
+
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    outline: none;
+    transition: all 0.3s;
+    direction: rtl;
+  }
+
+  .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .field select option { background: var(--navy2); color: #fff; }
+
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--accent);
+    background: rgba(200,149,42,0.08);
+    box-shadow: 0 0 0 3px rgba(200,149,42,0.12);
+  }
+
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  /* Star Rating */
+  .star-group { margin-bottom: 18px; }
+
+  .star-label {
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 8px; display: block;
+  }
+
+  .stars {
+    display: flex; gap: 6px;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .stars input { display: none; }
+
+  .stars label {
+    font-size: 26px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.15);
+    transition: all 0.2s;
+    line-height: 1;
+  }
+
+  .stars input:checked ~ label,
+  .stars label:hover,
+  .stars label:hover ~ label {
+    color: var(--accent2);
+    text-shadow: 0 0 12px rgba(232,184,75,0.6);
+  }
+
+  /* Radio/Checkbox groups */
+  .radio-group, .check-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+
+  .radio-group.col2 { grid-template-columns: repeat(2, 1fr); }
+  .radio-group.col1 { grid-template-columns: 1fr; }
+
+  .radio-opt, .check-opt {
+    position: relative;
+  }
+
+  .radio-opt input, .check-opt input { display: none; }
+
+  .radio-opt label, .check-opt label {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px; color: rgba(255,255,255,0.7);
+    transition: all 0.25s;
+    font-weight: 500;
+  }
+
+  .radio-opt input:checked + label,
+  .check-opt input:checked + label {
+    background: rgba(200,149,42,0.15);
+    border-color: var(--accent);
+    color: var(--accent2);
+  }
+
+  .radio-opt label:hover, .check-opt label:hover {
+    border-color: rgba(200,149,42,0.4);
+    background: rgba(200,149,42,0.08);
+  }
+
+  .radio-opt label::before {
+    content: '○';
+    font-size: 14px;
+    color: var(--gray);
+    flex-shrink: 0;
+  }
+
+  .radio-opt input:checked + label::before { content: '●'; color: var(--accent2); }
+
+  /* Scale */
+  .scale-wrap {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .scale-wrap input { display: none; }
+
+  .scale-wrap label {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    transition: all 0.2s;
+  }
+
+  .scale-wrap input:checked + label {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(200,149,42,0.4);
+  }
+
+  .scale-wrap label:hover {
+    border-color: var(--accent);
+    color: var(--accent2);
+  }
+
+  .scale-hints {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* Nav Buttons */
+  .nav-buttons {
+    display: flex; gap: 12px;
+    margin-top: 24px;
+    justify-content: space-between;
+  }
+
+  .btn {
+    padding: 13px 28px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px; font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: var(--navy);
+    box-shadow: 0 4px 20px rgba(200,149,42,0.35);
+    flex: 1;
+    justify-content: center;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(200,149,42,0.5);
+  }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+  }
+
+  .btn:disabled {
+    opacity: 0.5; cursor: not-allowed;
+    transform: none !important;
+  }
+
+  /* Step indicators */
+  .step-dots {
+    display: flex; justify-content: center;
+    gap: 8px; margin-bottom: 20px;
+  }
+
+  .step-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    transition: all 0.3s;
+  }
+
+  .step-dot.active {
+    background: var(--accent2);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  .step-dot.done { background: rgba(200,149,42,0.4); }
+
+  /* Success */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 24px;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .success-screen.active { display: block; }
+
+  .success-icon {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    margin: 0 auto 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px;
+    box-shadow: 0 0 40px rgba(46,204,113,0.4);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(46,204,113,0.4); }
+    50% { box-shadow: 0 0 60px rgba(46,204,113,0.7); }
+  }
+
+  .success-title {
+    font-size: 22px; font-weight: 800;
+    color: #fff; margin-bottom: 12px;
+  }
+
+  .success-desc { font-size: 14px; color: var(--gray); line-height: 1.8; }
+
+  /* Loading overlay */
+  .loading-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(10,22,40,0.85);
+    z-index: 100;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px;
+    backdrop-filter: blur(4px);
+  }
+
+  .loading-overlay.active { display: flex; }
+
+  .spinner {
+    width: 48px; height: 48px;
+    border: 3px solid rgba(200,149,42,0.2);
+    border-top-color: var(--accent2);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  .loading-text { color: var(--accent2); font-size: 14px; font-weight: 600; }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin: 20px 0;
+  }
+
+  .info-note {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: rgba(200,149,42,0.07);
+    border: 1px solid rgba(200,149,42,0.2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12px; color: rgba(255,255,255,0.55);
+    margin-bottom: 16px; line-height: 1.7;
+  }
+
+  .info-note span { color: var(--accent2); font-size: 16px; flex-shrink: 0; }
+
+  @media (max-width: 480px) {
+    .radio-group { grid-template-columns: 1fr 1fr; }
+    .stars label { font-size: 22px; }
+    .scale-wrap label { width: 30px; height: 30px; font-size: 12px; }
+    .company-name { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="gear-bg g1">⚙</div>
+<div class="gear-bg g2">⚙</div>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">در حال ارسال نظرات شما...</div>
+</div>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logos-row">
+      <img src="data:image/jpeg;base64,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" alt="پویانوین قطعه جی" class="logo-img logo-poya">
+      <img src="data:image/png;base64,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" alt="هلدینگ عظام" class="logo-img logo-azzam">
+    </div>
+    <div class="survey-title">فرم نظرسنجی سازمانی ۱۴۰۴</div>
+    <div class="survey-desc">نظرات، پیشنهادات و انتقادات شما در بهبود مستمر سازمان نقش اساسی دارد.<br>پاسخ‌های شما محرمانه بوده و صرفاً جهت ارتقاء کیفیت مورد استفاده قرار می‌گیرد.</div>
+    <div>
+<span class="badge-anon">🔒 پاسخ‌ها محرمانه است</span>
+    </div>
+  </div>
+
+  <!-- Step Dots -->
+  <div class="step-dots" id="stepDots">
+    <div class="step-dot active" data-step="0"></div>
+    <div class="step-dot" data-step="1"></div>
+    <div class="step-dot" data-step="2"></div>
+    <div class="step-dot" data-step="3"></div>
+    <div class="step-dot" data-step="4"></div>
+    <div class="step-dot" data-step="5"></div>
+    <div class="step-dot" data-step="6"></div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-bar-outer">
+      <div class="progress-bar-inner" id="progressBar"></div>
+    </div>
+    <div class="progress-text" id="progressText">مرحله ۱ از ۷</div>
+  </div>
+
+  <!-- STEP 0: اطلاعات پایه -->
+  <div class="step active" id="step0">
+    <div class="card">
+      <div class="section-header">
+        <div class="section-icon">👤</div>
+        <div>
+          <div class="section-title">اطلاعات پایه</div>
+          <div class="section-subtitle">ثبت هویت اختیاری است</div>
+        </div>
+      </div>
+
+      <div class="info-note">
+        <span>ℹ️</span>
+        ثبت نام و اطلاعات شخصی کاملاً اختیاری است. می‌توانید این فرم را به صورت ناشناس تکمیل کنید. در صورت تمایل به دریافت پاسخ، نام خود را وارد نمایید.
+      </div>
+
+      <div class="field">
+        <label>نام و نام خانوادگی <span class="optional">(اختیاری)</span></label>
+        <input type="text" id="f_name" placeholder="مثال: علی محمدی">
+      </div>
+
+      <div class="field">
+        <label>واحد سازمانی <span class="optional">*</span></label>
+        <select id="f_dept">
+          <option value="">-- انتخاب کنید --</option>
+          <option>مدیریت ارشد</option>
+          <option>منابع انسانی</option>
+          <option>آموزش</option>
+          <option>نگهداری و تعمیرات (نت)</option>
+          <option>HSE (ایمنی، بهداشت و محیط زیست)</option>
+          <option>تضمین کیفیت (QA)</option>
+          <option>کنترل کیفیت (QC)</option>
+          <option>تولید</option>
+          <option>مهندسی</option>
+          <option>برنامه‌ریزی</option>
+          <option>انبار و لجستیک</option>
+          <option>مالی و اداری</option>
+          <option>سایر</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>سمت شغلی <span class="optional">(اختیاری)</span></label>
+        <select id="f_role">
+          <option value="">-- انتخاب کنید --</option>
+          <option>مدیر / سرپرست</option>
+          <option>کارشناس</option>
+          <option>تکنسین</option>
+          <option>اپراتور</option>
+          <option>کارگر تولید</option>
+          <option>سایر</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>سابقه همکاری با شرکت</label>
+        <div class="radio-group col2">
+          <div class="radio-opt"><input type="radio" name="tenure" id="t1" value="کمتر از ۱ سال"><label for="t1">کمتر از ۱ سال</label></div>
+          <div class="radio-opt"><input type="radio" name="tenure" id="t2" value="۱ تا ۳ سال"><label for="t2">۱ تا ۳ سال</label></div>
+          <div class="radio-opt"><input type="radio" name="tenure" id="t3" value="۳ تا ۵ سال"><label for="t3">۳ تا ۵ سال</label></div>
+          <div class="radio-opt"><input type="radio" name="tenure" id="t4" value="بیش از ۵ سال"><label for="t4">بیش از ۵ سال</label></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-primary" onclick="nextStep()">ادامه ← </button>
+    </div>
+  </div>
+
+  <!-- STEP 1: رضایت کلی و مدیریت -->
+  <div class="step" id="step1">
+    <div class="card">
+      <div class="section-header">
+        <div class="section-icon">🏢</div>
+        <div>
+          <div class="section-title">ارزیابی مدیریت سازمان</div>
+          <div class="section-subtitle">نظر شما درباره عملکرد مدیریت</div>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">رضایت کلی از سازمان</span>
+        <div class="stars">
+          <input type="radio" name="s_overall" id="s_o5" value="5"><label for="s_o5">★</label>
+          <input type="radio" name="s_overall" id="s_o4" value="4"><label for="s_o4">★</label>
+          <input type="radio" name="s_overall" id="s_o3" value="3"><label for="s_o3">★</label>
+          <input type="radio" name="s_overall" id="s_o2" value="2"><label for="s_o2">★</label>
+          <input type="radio" name="s_overall" id="s_o1" value="1"><label for="s_o1">★</label>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="star-group">
+        <span class="star-label">کیفیت تصمیم‌گیری مدیریت ارشد</span>
+        <div class="stars">
+          <input type="radio" name="s_mgmt1" id="m15" value="5"><label for="m15">★</label>
+          <input type="radio" name="s_mgmt1" id="m14" value="4"><label for="m14">★</label>
+          <input type="radio" name="s_mgmt1" id="m13" value="3"><label for="m13">★</label>
+          <input type="radio" name="s_mgmt1" id="m12" value="2"><label for="m12">★</label>
+          <input type="radio" name="s_mgmt1" id="m11" value="1"><label for="m11">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">شفافیت و اطلاع‌رسانی مدیریت</span>
+        <div class="stars">
+          <input type="radio" name="s_mgmt2" id="m25" value="5"><label for="m25">★</label>
+          <input type="radio" name="s_mgmt2" id="m24" value="4"><label for="m24">★</label>
+          <input type="radio" name="s_mgmt2" id="m23" value="3"><label for="m23">★</label>
+          <input type="radio" name="s_mgmt2" id="m22" value="2"><label for="m22">★</label>
+          <input type="radio" name="s_mgmt2" id="m21" value="1"><label for="m21">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">حمایت مدیریت از پرسنل و حل مشکلات</span>
+        <div class="stars">
+          <input type="radio" name="s_mgmt3" id="m35" value="5"><label for="m35">★</label>
+          <input type="radio" name="s_mgmt3" id="m34" value="4"><label for="m34">★</label>
+          <input type="radio" name="s_mgmt3" id="m33" value="3"><label for="m33">★</label>
+          <input type="radio" name="s_mgmt3" id="m32" value="2"><label for="m32">★</label>
+          <input type="radio" name="s_mgmt3" id="m31" value="1"><label for="m31">★</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>محیط کار از نظر احترام و عدالت چطور است؟</label>
+        <div class="radio-group col2">
+          <div class="radio-opt"><input type="radio" name="r_justice" id="j1" value="عالی"><label for="j1">عالی</label></div>
+          <div class="radio-opt"><input type="radio" name="r_justice" id="j2" value="خوب"><label for="j2">خوب</label></div>
+          <div class="radio-opt"><input type="radio" name="r_justice" id="j3" value="متوسط"><label for="j3">متوسط</label></div>
+          <div class="radio-opt"><input type="radio" name="r_justice" id="j4" value="ضعیف"><label for="j4">ضعیف</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>توضیحات یا پیشنهاد برای بهبود مدیریت <span class="optional">(اختیاری)</span></label>
+        <textarea id="f_mgmt_comment" placeholder="نظر خود را بنویسید..."></textarea>
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep()">→ قبلی</button>
+      <button class="btn btn-primary" onclick="nextStep()">ادامه ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: منابع انسانی، آموزش، رفاه -->
+  <div class="step" id="step2">
+    <div class="card">
+      <div class="section-header">
+        <div class="section-icon">👥</div>
+        <div>
+          <div class="section-title">منابع انسانی، آموزش و رفاه کارکنان</div>
+          <div class="section-subtitle">ارزیابی خدمات پرسنلی و آموزشی</div>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">کیفیت برنامه‌های آموزشی ارائه‌شده</span>
+        <div class="stars">
+          <input type="radio" name="s_train" id="tr5" value="5"><label for="tr5">★</label>
+          <input type="radio" name="s_train" id="tr4" value="4"><label for="tr4">★</label>
+          <input type="radio" name="s_train" id="tr3" value="3"><label for="tr3">★</label>
+          <input type="radio" name="s_train" id="tr2" value="2"><label for="tr2">★</label>
+          <input type="radio" name="s_train" id="tr1" value="1"><label for="tr1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">عملکرد واحد منابع انسانی</span>
+        <div class="stars">
+          <input type="radio" name="s_hr" id="hr5" value="5"><label for="hr5">★</label>
+          <input type="radio" name="s_hr" id="hr4" value="4"><label for="hr4">★</label>
+          <input type="radio" name="s_hr" id="hr3" value="3"><label for="hr3">★</label>
+          <input type="radio" name="s_hr" id="hr2" value="2"><label for="hr2">★</label>
+          <input type="radio" name="s_hr" id="hr1" value="1"><label for="hr1">★</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>آیا آموزش‌های دریافتی با شغل شما مرتبط و کاربردی بوده؟</label>
+        <div class="radio-group col2">
+          <div class="radio-opt"><input type="radio" name="r_traineq" id="te1" value="کاملاً"><label for="te1">کاملاً</label></div>
+          <div class="radio-opt"><input type="radio" name="r_traineq" id="te2" value="تا حدی"><label for="te2">تا حدی</label></div>
+          <div class="radio-opt"><input type="radio" name="r_traineq" id="te3" value="کم"><label for="te3">کم</label></div>
+          <div class="radio-opt"><input type="radio" name="r_traineq" id="te4" value="خیر"><label for="te4">خیر</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>کدام موارد رفاهی نیاز به بهبود دارد؟ <span class="optional">(چندتایی)</span></label>
+        <div class="check-group" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div class="check-opt"><input type="checkbox" id="wf1" value="حقوق و مزایا"><label for="wf1">حقوق و مزایا</label></div>
+          <div class="check-opt"><input type="checkbox" id="wf2" value="بیمه تکمیلی"><label for="wf2">بیمه تکمیلی</label></div>
+          <div class="check-opt"><input type="checkbox" id="wf3" value="سرویس و ایاب ذهاب"><label for="wf3">سرویس و ایاب ذهاب</label></div>
+          <div class="check-opt"><input type="checkbox" id="wf4" value="غذا و رستوران"><label for="wf4">غذا و رستوران</label></div>
+          <div class="check-opt"><input type="checkbox" id="wf5" value="مرخصی و اوقات فراغت"><label for="wf5">مرخصی</label></div>
+          <div class="check-opt"><input type="checkbox" id="wf6" value="تجهیزات و ابزار کار"><label for="wf6">تجهیزات کار</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>نیاز آموزشی که احساس می‌کنید در سازمان وجود دارد <span class="optional">(اختیاری)</span></label>
+        <textarea id="f_training_need" placeholder="مثلاً: آموزش FMEA، ایمنی، مهارت‌های ارتباطی..."></textarea>
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep()">→ قبلی</button>
+      <button class="btn btn-primary" onclick="nextStep()">ادامه ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: کیفیت، HSE، نت، تولید -->
+  <div class="step" id="step3">
+    <div class="card">
+      <div class="section-header">
+        <div class="section-icon">🔧</div>
+        <div>
+          <div class="section-title">واحدهای فنی و تخصصی</div>
+          <div class="section-subtitle">کیفیت · HSE · نت · تولید · مهندسی · برنامه‌ریزی</div>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">کیفیت فرآیندهای تضمین کیفیت (QA)</span>
+        <div class="stars">
+          <input type="radio" name="s_qa" id="qa5" value="5"><label for="qa5">★</label>
+          <input type="radio" name="s_qa" id="qa4" value="4"><label for="qa4">★</label>
+          <input type="radio" name="s_qa" id="qa3" value="3"><label for="qa3">★</label>
+          <input type="radio" name="s_qa" id="qa2" value="2"><label for="qa2">★</label>
+          <input type="radio" name="s_qa" id="qa1" value="1"><label for="qa1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">عملکرد واحد کنترل کیفیت (QC)</span>
+        <div class="stars">
+          <input type="radio" name="s_qc" id="qc5" value="5"><label for="qc5">★</label>
+          <input type="radio" name="s_qc" id="qc4" value="4"><label for="qc4">★</label>
+          <input type="radio" name="s_qc" id="qc3" value="3"><label for="qc3">★</label>
+          <input type="radio" name="s_qc" id="qc2" value="2"><label for="qc2">★</label>
+          <input type="radio" name="s_qc" id="qc1" value="1"><label for="qc1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">عملکرد واحد HSE (ایمنی، بهداشت و محیط زیست)</span>
+        <div class="stars">
+          <input type="radio" name="s_hse" id="hse5" value="5"><label for="hse5">★</label>
+          <input type="radio" name="s_hse" id="hse4" value="4"><label for="hse4">★</label>
+          <input type="radio" name="s_hse" id="hse3" value="3"><label for="hse3">★</label>
+          <input type="radio" name="s_hse" id="hse2" value="2"><label for="hse2">★</label>
+          <input type="radio" name="s_hse" id="hse1" value="1"><label for="hse1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">عملکرد واحد نگهداری و تعمیرات (نت)</span>
+        <div class="stars">
+          <input type="radio" name="s_maint" id="ma5" value="5"><label for="ma5">★</label>
+          <input type="radio" name="s_maint" id="ma4" value="4"><label for="ma4">★</label>
+          <input type="radio" name="s_maint" id="ma3" value="3"><label for="ma3">★</label>
+          <input type="radio" name="s_maint" id="ma2" value="2"><label for="ma2">★</label>
+          <input type="radio" name="s_maint" id="ma1" value="1"><label for="ma1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">هماهنگی واحد تولید</span>
+        <div class="stars">
+          <input type="radio" name="s_prod" id="pr5" value="5"><label for="pr5">★</label>
+          <input type="radio" name="s_prod" id="pr4" value="4"><label for="pr4">★</label>
+          <input type="radio" name="s_prod" id="pr3" value="3"><label for="pr3">★</label>
+          <input type="radio" name="s_prod" id="pr2" value="2"><label for="pr2">★</label>
+          <input type="radio" name="s_prod" id="pr1" value="1"><label for="pr1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">عملکرد واحد مهندسی و برنامه‌ریزی</span>
+        <div class="stars">
+          <input type="radio" name="s_eng" id="en5" value="5"><label for="en5">★</label>
+          <input type="radio" name="s_eng" id="en4" value="4"><label for="en4">★</label>
+          <input type="radio" name="s_eng" id="en3" value="3"><label for="en3">★</label>
+          <input type="radio" name="s_eng" id="en2" value="2"><label for="en2">★</label>
+          <input type="radio" name="s_eng" id="en1" value="1"><label for="en1">★</label>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+
+
+      <div class="field">
+        <label>مهم‌ترین چالش فنی سازمان از دید شما <span class="optional">(اختیاری)</span></label>
+        <textarea id="f_tech_challenge" placeholder="مشکلات خط تولید، ماشین‌آلات، فرآیند کنترل کیفیت..."></textarea>
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep()">→ قبلی</button>
+      <button class="btn btn-primary" onclick="nextStep()">ادامه ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: محیط کار و ایمنی -->
+  <div class="step" id="step4">
+    <div class="card">
+      <div class="section-header">
+        <div class="section-icon">🛡️</div>
+        <div>
+          <div class="section-title">محیط کار، ایمنی و فرهنگ سازمانی</div>
+          <div class="section-subtitle">شرایط فیزیکی و فرهنگی محیط کار</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>امنیت شغلی خود را چطور ارزیابی می‌کنید؟</label>
+        <div class="scale-wrap">
+          <input type="radio" name="scale_security" id="sc1" value="1"><label for="sc1">۱</label>
+          <input type="radio" name="scale_security" id="sc2" value="2"><label for="sc2">۲</label>
+          <input type="radio" name="scale_security" id="sc3" value="3"><label for="sc3">۳</label>
+          <input type="radio" name="scale_security" id="sc4" value="4"><label for="sc4">۴</label>
+          <input type="radio" name="scale_security" id="sc5" value="5"><label for="sc5">۵</label>
+          <input type="radio" name="scale_security" id="sc6" value="6"><label for="sc6">۶</label>
+          <input type="radio" name="scale_security" id="sc7" value="7"><label for="sc7">۷</label>
+          <input type="radio" name="scale_security" id="sc8" value="8"><label for="sc8">۸</label>
+          <input type="radio" name="scale_security" id="sc9" value="9"><label for="sc9">۹</label>
+          <input type="radio" name="scale_security" id="sc10" value="10"><label for="sc10">۱۰</label>
+        </div>
+        <div class="scale-hints"><span>بسیار ضعیف</span><span>عالی</span></div>
+      </div>
+
+      <div class="field">
+        <label>وضعیت ایمنی و رعایت HSE در محیط کار چطور است؟</label>
+        <div class="radio-group col2">
+          <div class="radio-opt"><input type="radio" name="r_safety" id="sf1" value="عالی"><label for="sf1">عالی</label></div>
+          <div class="radio-opt"><input type="radio" name="r_safety" id="sf2" value="خوب"><label for="sf2">خوب</label></div>
+          <div class="radio-opt"><input type="radio" name="r_safety" id="sf3" value="نیاز به بهبود"><label for="sf3">نیاز به بهبود</label></div>
+          <div class="radio-opt"><input type="radio" name="r_safety" id="sf4" value="ضعیف"><label for="sf4">ضعیف</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>همکاری و روحیه تیمی در سازمان را چطور ارزیابی می‌کنید؟</label>
+        <div class="scale-wrap">
+          <input type="radio" name="scale_team" id="tm1" value="1"><label for="tm1">۱</label>
+          <input type="radio" name="scale_team" id="tm2" value="2"><label for="tm2">۲</label>
+          <input type="radio" name="scale_team" id="tm3" value="3"><label for="tm3">۳</label>
+          <input type="radio" name="scale_team" id="tm4" value="4"><label for="tm4">۴</label>
+          <input type="radio" name="scale_team" id="tm5" value="5"><label for="tm5">۵</label>
+          <input type="radio" name="scale_team" id="tm6" value="6"><label for="tm6">۶</label>
+          <input type="radio" name="scale_team" id="tm7" value="7"><label for="tm7">۷</label>
+          <input type="radio" name="scale_team" id="tm8" value="8"><label for="tm8">۸</label>
+          <input type="radio" name="scale_team" id="tm9" value="9"><label for="tm9">۹</label>
+          <input type="radio" name="scale_team" id="tm10" value="10"><label for="tm10">۱۰</label>
+        </div>
+        <div class="scale-hints"><span>بسیار ضعیف</span><span>عالی</span></div>
+      </div>
+
+      <div class="field">
+        <label>چه چیزی بیشتر از همه انگیزه شما را کاهش می‌دهد؟ <span class="optional">(چندتایی)</span></label>
+        <div class="check-group" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div class="check-opt"><input type="checkbox" id="dm1" value="عدم شنیده شدن نظرات"><label for="dm1">شنیده نشدن نظرات</label></div>
+          <div class="check-opt"><input type="checkbox" id="dm2" value="نبود رشد شغلی"><label for="dm2">نبود رشد شغلی</label></div>
+          <div class="check-opt"><input type="checkbox" id="dm3" value="فشار کاری زیاد"><label for="dm3">فشار کاری زیاد</label></div>
+          <div class="check-opt"><input type="checkbox" id="dm4" value="محیط فیزیکی نامناسب"><label for="dm4">محیط نامناسب</label></div>
+          <div class="check-opt"><input type="checkbox" id="dm5" value="حقوق و مزایای ناکافی"><label for="dm5">مزایای ناکافی</label></div>
+          <div class="check-opt"><input type="checkbox" id="dm6" value="روابط ناسالم بین افراد"><label for="dm6">روابط ناسالم</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>آیا به توصیه شغل در این سازمان به دیگران فکر می‌کنید؟</label>
+        <div class="radio-group col2">
+          <div class="radio-opt"><input type="radio" name="r_recommend" id="rc1" value="قطعاً بله"><label for="rc1">قطعاً بله</label></div>
+          <div class="radio-opt"><input type="radio" name="r_recommend" id="rc2" value="احتمالاً"><label for="rc2">احتمالاً</label></div>
+          <div class="radio-opt"><input type="radio" name="r_recommend" id="rc3" value="نامطمئنم"><label for="rc3">نامطمئنم</label></div>
+          <div class="radio-opt"><input type="radio" name="r_recommend" id="rc4" value="خیر"><label for="rc4">خیر</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep()">→ قبلی</button>
+      <button class="btn btn-primary" onclick="nextStep()">ادامه ←</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: خدمات رفاهی، رستوران، امکانات -->
+  <div class="step" id="step5">
+    <div class="card">
+      <div class="section-header">
+        <div class="section-icon">🍽️</div>
+        <div>
+          <div class="section-title">خدمات رفاهی و امکانات سازمان</div>
+          <div class="section-subtitle">رستوران، آشپزخانه، سرویس‌ها و محیط عمومی</div>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">کیفیت غذای رستوران / آشپزخانه</span>
+        <div class="stars">
+          <input type="radio" name="s_food" id="fd5" value="5"><label for="fd5">★</label>
+          <input type="radio" name="s_food" id="fd4" value="4"><label for="fd4">★</label>
+          <input type="radio" name="s_food" id="fd3" value="3"><label for="fd3">★</label>
+          <input type="radio" name="s_food" id="fd2" value="2"><label for="fd2">★</label>
+          <input type="radio" name="s_food" id="fd1" value="1"><label for="fd1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">تنوع و تغذیه مناسب وعده‌های غذایی</span>
+        <div class="stars">
+          <input type="radio" name="s_food2" id="fv5" value="5"><label for="fv5">★</label>
+          <input type="radio" name="s_food2" id="fv4" value="4"><label for="fv4">★</label>
+          <input type="radio" name="s_food2" id="fv3" value="3"><label for="fv3">★</label>
+          <input type="radio" name="s_food2" id="fv2" value="2"><label for="fv2">★</label>
+          <input type="radio" name="s_food2" id="fv1" value="1"><label for="fv1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">نظافت و بهداشت محیط رستوران و آشپزخانه</span>
+        <div class="stars">
+          <input type="radio" name="s_food3" id="fh5" value="5"><label for="fh5">★</label>
+          <input type="radio" name="s_food3" id="fh4" value="4"><label for="fh4">★</label>
+          <input type="radio" name="s_food3" id="fh3" value="3"><label for="fh3">★</label>
+          <input type="radio" name="s_food3" id="fh2" value="2"><label for="fh2">★</label>
+          <input type="radio" name="s_food3" id="fh1" value="1"><label for="fh1">★</label>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="star-group">
+        <span class="star-label">کیفیت سرویس رفت و آمد (ایاب و ذهاب)</span>
+        <div class="stars">
+          <input type="radio" name="s_transport" id="tr_5" value="5"><label for="tr_5">★</label>
+          <input type="radio" name="s_transport" id="tr_4" value="4"><label for="tr_4">★</label>
+          <input type="radio" name="s_transport" id="tr_3" value="3"><label for="tr_3">★</label>
+          <input type="radio" name="s_transport" id="tr_2" value="2"><label for="tr_2">★</label>
+          <input type="radio" name="s_transport" id="tr_1" value="1"><label for="tr_1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">وضعیت سرویس‌های بهداشتی و رختکن‌ها</span>
+        <div class="stars">
+          <input type="radio" name="s_sanitary" id="sn5" value="5"><label for="sn5">★</label>
+          <input type="radio" name="s_sanitary" id="sn4" value="4"><label for="sn4">★</label>
+          <input type="radio" name="s_sanitary" id="sn3" value="3"><label for="sn3">★</label>
+          <input type="radio" name="s_sanitary" id="sn2" value="2"><label for="sn2">★</label>
+          <input type="radio" name="s_sanitary" id="sn1" value="1"><label for="sn1">★</label>
+        </div>
+      </div>
+
+      <div class="star-group">
+        <span class="star-label">نظافت و نگهداری محیط عمومی کارخانه</span>
+        <div class="stars">
+          <input type="radio" name="s_clean" id="cl5" value="5"><label for="cl5">★</label>
+          <input type="radio" name="s_clean" id="cl4" value="4"><label for="cl4">★</label>
+          <input type="radio" name="s_clean" id="cl3" value="3"><label for="cl3">★</label>
+          <input type="radio" name="s_clean" id="cl2" value="2"><label for="cl2">★</label>
+          <input type="radio" name="s_clean" id="cl1" value="1"><label for="cl1">★</label>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="field">
+        <label>کدام امکانات رفاهی بیشتر نیاز به بهبود دارند؟ <span class="optional">(چندتایی)</span></label>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div class="check-opt"><input type="checkbox" id="fac1" value="رستوران و غذا"><label for="fac1">رستوران و غذا</label></div>
+          <div class="check-opt"><input type="checkbox" id="fac2" value="سرویس ایاب ذهاب"><label for="fac2">سرویس ایاب ذهاب</label></div>
+          <div class="check-opt"><input type="checkbox" id="fac3" value="سرویس‌های بهداشتی"><label for="fac3">سرویس‌های بهداشتی</label></div>
+          <div class="check-opt"><input type="checkbox" id="fac4" value="رختکن و نمازخانه"><label for="fac4">رختکن و نمازخانه</label></div>
+          <div class="check-opt"><input type="checkbox" id="fac5" value="پارکینگ و فضای خارجی"><label for="fac5">پارکینگ</label></div>
+          <div class="check-opt"><input type="checkbox" id="fac6" value="فضای استراحت کارکنان"><label for="fac6">فضای استراحت</label></div>
+          <div class="check-opt"><input type="checkbox" id="fac7" value="روشنایی و تهویه سالن"><label for="fac7">روشنایی و تهویه</label></div>
+          <div class="check-opt"><input type="checkbox" id="fac8" value="سیستم سرمایش و گرمایش"><label for="fac8">سرمایش / گرمایش</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>نظر یا پیشنهاد خاص درباره خدمات رفاهی <span class="optional">(اختیاری)</span></label>
+        <textarea id="f_welfare_comment" placeholder="مثلاً: بهبود منو رستوران، تعمیر سرویس‌ها، افزایش مسیرهای سرویس..."></textarea>
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep()">→ قبلی</button>
+      <button class="btn btn-primary" onclick="nextStep()">ادامه ←</button>
+    </div>
+  </div>
+
+
+  <!-- STEP 5: پیشنهادات و انتقادات -->
+  <div class="step" id="step6">
+    <div class="card">
+      <div class="section-header">
+        <div class="section-icon">💡</div>
+        <div>
+          <div class="section-title">پیشنهادات، انتقادات و ایده‌ها</div>
+          <div class="section-subtitle">صدای شما برای ما مهم است</div>
+        </div>
+      </div>
+
+      <div class="info-note">
+        <span>💬</span>
+        این بخش کاملاً آزاد است. هر نقطه‌ضعف، ایده بهبود، یا پیشنهاد سازنده‌ای که دارید اینجا بنویسید. تمام پیام‌ها محرمانه به مدیریت ارشد منتقل می‌شود.
+      </div>
+
+      <div class="field">
+        <label>مهم‌ترین پیشنهاد شما برای بهبود سازمان</label>
+        <textarea id="f_suggestion" style="min-height:110px;" placeholder="پیشنهاد سازنده خود را بنویسید..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>انتقادات یا مشکلات جدی که باید رسیدگی شود</label>
+        <textarea id="f_criticism" style="min-height:110px;" placeholder="مشکل، انتقاد یا نگرانی خود را مطرح کنید..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>اگر ۳ اولویت برای تغییر داشتید، چه بود؟ <span class="optional">(اختیاری)</span></label>
+        <input type="text" id="f_priority1" placeholder="اولویت اول" style="margin-bottom:8px;">
+        <input type="text" id="f_priority2" placeholder="اولویت دوم" style="margin-bottom:8px;">
+        <input type="text" id="f_priority3" placeholder="اولویت سوم">
+      </div>
+
+      <div class="field">
+        <label>سایر نظرات یا هر چیزی که مایلید مدیریت بداند <span class="optional">(اختیاری)</span></label>
+        <textarea id="f_other" placeholder="هر پیامی که می‌خواهید مستقیم به گوش مدیریت برسد..."></textarea>
+      </div>
+
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep()">→ قبلی</button>
+      <button class="btn btn-primary" onclick="submitSurvey()" id="submitBtn">ارسال نظرسنجی 📨</button>
+    </div>
+  </div>
+
+  <!-- Success Screen -->
+  <div class="success-screen" id="successScreen">
+    <div class="card" style="padding:48px 24px;">
+      <div class="success-icon">✓</div>
+      <div class="success-title">نظرات شما با موفقیت ثبت شد!</div>
+      <div class="success-desc">
+        از وقتی که گذاشتید و اعتمادی که به ما داشتید سپاسگزاریم.<br>
+        پاسخ‌های شما محرمانه خواهد ماند و به بهبود سازمان کمک می‌کند.<br><br>
+        <strong style="color:var(--accent2);">پویانوین قطعه جی | هلدینگ عظام</strong><br>
+        <span style="font-size:12px;color:var(--gray);">بهبود مستمر | تعالی سازمانی</span>
+      </div>
+      <button class="btn btn-primary" onclick="resetForm()" style="max-width:200px; margin:28px auto 0; font-size:13px;">
+        ارسال نظر جدید
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const TOTAL_STEPS = 7;
+  let currentStep = 0;
+
+  function updateProgress() {
+    const pct = (currentStep / (TOTAL_STEPS - 1)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `مرحله ${currentStep + 1} از ${TOTAL_STEPS}`;
+    
+    document.querySelectorAll('.step-dot').forEach((d, i) => {
+      d.classList.remove('active', 'done');
+      if (i === currentStep) d.classList.add('active');
+      else if (i < currentStep) d.classList.add('done');
+    });
+  }
+
+  function nextStep() {
+    if (currentStep === 0) {
+      const dept = document.getElementById('f_dept').value;
+      if (!dept) {
+        alert('لطفاً واحد سازمانی خود را انتخاب کنید.');
+        return;
+      }
+    }
+    if (currentStep < TOTAL_STEPS - 1) {
+      document.getElementById('step' + currentStep).classList.remove('active');
+      currentStep++;
+      document.getElementById('step' + currentStep).classList.add('active');
+      updateProgress();
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 0) {
+      document.getElementById('step' + currentStep).classList.remove('active');
+      currentStep--;
+      document.getElementById('step' + currentStep).classList.add('active');
+      updateProgress();
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+  }
+
+  function getRadioVal(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : 'پاسخ داده نشده';
+  }
+
+  function getStarVal(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? '⭐'.repeat(parseInt(el.value)) + ` (${el.value}/5)` : 'پاسخ داده نشده';
+  }
+
+  function getCheckVals(prefix, count) {
+    const vals = [];
+    for (let i = 1; i <= count; i++) {
+      const el = document.getElementById(prefix + i);
+      if (el && el.checked) vals.push(el.value);
+    }
+    return vals.length ? vals.join('، ') : 'موردی انتخاب نشده';
+  }
+
+  async function submitSurvey() {
+    document.getElementById('loadingOverlay').classList.add('active');
+    document.getElementById('submitBtn').disabled = true;
+
+    const data = {
+      نام: document.getElementById('f_name').value || 'ناشناس',
+      واحد: document.getElementById('f_dept').value,
+      سمت: document.getElementById('f_role').value || 'مشخص نشده',
+      سابقه: getRadioVal('tenure'),
+
+      رضایت_کلی: getStarVal('s_overall'),
+      کیفیت_تصمیم_مدیریت: getStarVal('s_mgmt1'),
+      شفافیت_مدیریت: getStarVal('s_mgmt2'),
+      حمایت_مدیریت: getStarVal('s_mgmt3'),
+      عدالت_محیط_کار: getRadioVal('r_justice'),
+      توضیح_مدیریت: document.getElementById('f_mgmt_comment').value || '-',
+
+      کیفیت_آموزش: getStarVal('s_train'),
+      عملکرد_منابع_انسانی: getStarVal('s_hr'),
+      ارتباط_آموزش_با_شغل: getRadioVal('r_traineq'),
+      موارد_رفاهی_نیازمند_بهبود: getCheckVals('wf', 6),
+      نیاز_آموزشی: document.getElementById('f_training_need').value || '-',
+
+      کیفیت_QA: getStarVal('s_qa'),
+      عملکرد_QC: getStarVal('s_qc'),
+      عملکرد_HSE: getStarVal('s_hse'),
+      عملکرد_نت: getStarVal('s_maint'),
+      هماهنگی_تولید: getStarVal('s_prod'),
+      عملکرد_مهندسی_برنامه_ریزی: getStarVal('s_eng'),
+      چالش_فنی: document.getElementById('f_tech_challenge').value || '-',
+
+      امنیت_شغلی: getRadioVal('scale_security') + '/10',
+      وضعیت_ایمنی: getRadioVal('r_safety'),
+      روحیه_تیمی: getRadioVal('scale_team') + '/10',
+      عوامل_کاهش_انگیزه: getCheckVals('dm', 6),
+      توصیه_شغلی: getRadioVal('r_recommend'),
+
+      کیفیت_غذای_رستوران: getStarVal('s_food'),
+      تنوع_وعده_غذایی: getStarVal('s_food2'),
+      بهداشت_رستوران: getStarVal('s_food3'),
+      سرویس_ایاب_ذهاب: getStarVal('s_transport'),
+      سرویس_بهداشتی: getStarVal('s_sanitary'),
+      نظافت_محیط_عمومی: getStarVal('s_clean'),
+      امکانات_نیازمند_بهبود: getCheckVals('fac', 8),
+      نظر_خدمات_رفاهی: document.getElementById('f_welfare_comment').value || '-',
+
+      پیشنهاد_اصلی: document.getElementById('f_suggestion').value || '-',
+      انتقادات: document.getElementById('f_criticism').value || '-',
+      اولویت_اول: document.getElementById('f_priority1').value || '-',
+      اولویت_دوم: document.getElementById('f_priority2').value || '-',
+      اولویت_سوم: document.getElementById('f_priority3').value || '-',
+      سایر_نظرات: document.getElementById('f_other').value || '-',
+    };
+
+    // Build readable message for email body
+    const lines = Object.entries(data).map(([k, v]) => k.replace(/_/g,' ') + ': ' + v);
+    const fullMessage = '📋 فرم نظرسنجی سازمانی\nپویانوین قطعه جی | هلدینگ عظام\nتاریخ: ' + new Date().toLocaleDateString('fa-IR') + '\n' + '='.repeat(40) + '\n' + lines.join('\n');
+
+    // Build FormData for FormSubmit.co
+    const formData = new FormData();
+    formData.append('_subject', 'نظرسنجی سازمانی پویانوین - ' + data['واحد'] + ' - ' + new Date().toLocaleDateString('fa-IR'));
+    formData.append('_cc', 'Sadeghi.a@payazob.ir');
+    formData.append('_captcha', 'false');
+    formData.append('_template', 'table');
+    formData.append('_next', 'about:blank');
+
+    // Add all fields
+    Object.entries(data).forEach(([k, v]) => {
+      formData.append(k.replace(/_/g, ' '), v);
+    });
+
+    try {
+      const response = await fetch('https://formsubmit.co/abbas1414sadeghi@gmail.com', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok || response.status === 200) {
+        document.getElementById('loadingOverlay').classList.remove('active');
+        document.getElementById('step' + currentStep).classList.remove('active');
+        document.getElementById('progressWrap').style.display = 'none';
+        document.getElementById('stepDots').style.display = 'none';
+        document.getElementById('successScreen').classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      } else {
+        throw new Error('Server error: ' + response.status);
+      }
+    } catch(e) {
+      document.getElementById('loadingOverlay').classList.remove('active');
+      document.getElementById('submitBtn').disabled = false;
+      alert('خطا در ارسال. لطفاً اتصال اینترنت خود را بررسی کنید و دوباره تلاش کنید.');
+    }
+  }
+
+  function resetForm() {
+    document.getElementById('successScreen').classList.remove('active');
+    document.getElementById('progressWrap').style.display = 'flex';
+    document.getElementById('stepDots').style.display = 'flex';
+    document.querySelectorAll('input[type=text], textarea').forEach(el => el.value = '');
+    document.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(el => el.checked = false);
+    document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+    currentStep = 0;
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step0').classList.add('active');
+    document.getElementById('submitBtn').disabled = false;
+    updateProgress();
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>
